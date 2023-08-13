@@ -635,7 +635,7 @@ NDIGITS_MIN = -int((rfloat.DBL_MAX_EXP + 1) * 0.30103)
 def rpy_round(number, ndigits):
     # Algorithm copied directly from CPython
 
-    if number == 0 or rfloat.isinf(number) or rfloat.isnan(number):
+    if number == 0 or math.isinf(number) or math.isnan(number):
         return number
 
     # Deal with extreme values for ndigits. For ndigits > NDIGITS_MAX, x
@@ -649,7 +649,7 @@ def rpy_round(number, ndigits):
 
     # finite x, and ndigits is not unreasonably large
     z = rfloat.round_double(number, ndigits)
-    if rfloat.isinf(z):
+    if math.isinf(z):
         raise OverflowError
     return z
 

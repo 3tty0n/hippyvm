@@ -67,7 +67,7 @@ def posix_getegid(space):
 @wrap(['space'])
 def posix_geteuid(space):
     """ posix_geteuid - Return the effective user ID of the current process """
-    return space.newint(os.geteuid())
+    return space.newint(intmask(os.geteuid()))
 
 
 @wrap(['space'])

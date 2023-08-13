@@ -1,6 +1,5 @@
 import sys, math
 from rpython.rlib.rarithmetic import intmask, maxint, r_longlong
-from rpython.rlib.rfloat import isnan
 from rpython.rlib import jit
 from hippy.objects.floatobject import W_FloatObject
 from hippy.objects.intobject import W_IntObject
@@ -173,7 +172,7 @@ def force_float_to_int_in_any_way(x):
     is 0, even if intmask(int(f)) would return some bits."""
     # magic values coming from pypy.rlib.rarithmetic.ovfcheck_float_to_int
     # on 64-bit.
-    if isnan(x):
+    if math.isnan(x):
         return -maxint - 1
     if -9223372036854776832.0 <= x < 9223372036854775296.0:
         x = r_longlong(x)

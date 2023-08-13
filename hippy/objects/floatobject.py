@@ -1,9 +1,9 @@
-import sys
+import sys, math
 from hippy.objects.base import W_Object
 from hippy.objects.support import _new_binop
 from hippy.consts import BINOP_LIST, BINOP_COMPARISON_LIST
 from rpython.rlib.rarithmetic import intmask, ovfcheck
-from rpython.rlib.rfloat import isnan, isinf, double_to_string, DTSF_CUT_EXP_0
+from rpython.rlib.rfloat import double_to_string, DTSF_CUT_EXP_0
 
 
 MAX_PRECISION = 500
@@ -54,7 +54,7 @@ class W_FloatObject(W_Object):
         return str(self.floatval)
 
     def int_w(self, space):
-        if isnan(self.floatval):
+        if math.isnan(self.floatval):
             result = -sys.maxint - 1
             space.ec.hippy_warn("cast float to integer: NaN"
                                 " is returned as %d" % result)
@@ -103,18 +103,18 @@ class W_FloatObject(W_Object):
         return 'W_FloatObject(%r)' % self.floatval
 
     def var_dump(self, space, indent, recursion):
-        if isinf(self.floatval):
+        if math.isinf(self.floatval):
             inf = "%s" % self.floatval
             return "%sfloat(%s)\n" % (indent, inf.upper())
-        if isnan(self.floatval):
+        if math.isnan(self.floatval):
             return "%sfloat(NAN)\n" % (indent,)
         return "%sfloat(%s)\n" % (indent, self.str(space))
 
     def var_export(self, space, indent, recursion, suffix):
-        if isinf(self.floatval):
+        if math.isinf(self.floatval):
             inf = "%s" % self.floatval
             return "%s" % inf.upper()
-        if isnan(self.floatval):
+        if math.isnan(self.floatval):
             return "NAN"
         out = "%s%s%s" % (indent, self.str(space), suffix)
         return out

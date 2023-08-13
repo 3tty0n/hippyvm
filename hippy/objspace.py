@@ -5,7 +5,8 @@ from collections import OrderedDict
 from rpython.rlib.objectmodel import specialize, we_are_translated
 from rpython.rlib.rarithmetic import intmask
 from rpython.rlib.rstring import StringBuilder
-from rpython.rlib.signature import signature, types
+from rpython.rlib.signature import signature
+from rpython.rlib.signature import types
 from rpython.rlib import jit, rsignal
 from hippy.consts import BINOP_LIST, BINOP_COMPARISON_LIST
 from hippy.error import VisibilityError, InvalidCallback
