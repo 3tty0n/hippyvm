@@ -61,7 +61,7 @@ def posix_getcwd(space):
 def posix_getegid(space):
     """ posix_getegid - Return the effective group
     ID of the current process """
-    return space.newint(os.getegid())
+    return space.newint(intmask(os.getegid()))
 
 
 @wrap(['space'])
@@ -73,7 +73,7 @@ def posix_geteuid(space):
 @wrap(['space'])
 def posix_getgid(space):
     """ posix_getgid - Return the real group ID of the current process """
-    return space.newint(os.getgid())
+    return space.newint(intmask(os.getgid()))
 
 
 def _build_group_info(space, res):
@@ -209,7 +209,7 @@ def posix_getsid(space, pid):
 def posix_getuid(space):
     """ posix_getuid - Return the real user ID of the current process """
     try:
-        return space.newint(os.getuid())
+        return space.newint(intmask(os.getuid()))
     except OSError, e:
         space.set_errno(e.errno)
         return space.newbool(False)

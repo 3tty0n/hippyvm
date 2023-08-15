@@ -481,7 +481,7 @@ def getlastmod():
 def getmygid(space):
     """ Get PHP script owner's GID"""
     res = os.getgid()
-    return space.newint(res)
+    return space.newint(intmask(res))
 
 
 def getmyinode():
@@ -500,7 +500,7 @@ def getmypid(space):
 def getmyuid(space):
     """ Gets PHP script owner's UID"""
     res = os.geteuid()
-    return space.newint(res)
+    return space.newint(intmask(res))
 
 
 def getopt():
