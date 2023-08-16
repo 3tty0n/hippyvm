@@ -115,6 +115,7 @@ driver = jit.JitDriver(reds=['frame', 'self'],
                        greens=['pc', 'bytecode', 'contextclass'],
                        virtualizables=['frame'],
                        get_printable_location=get_printable_location,
+                       is_recursive=True,
                        )
 
 
